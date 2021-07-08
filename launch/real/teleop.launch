@@ -5,7 +5,7 @@
   <arg name="rviz_conf" default="$(find oit_navigation_minibot_03)/config/rviz/simple.rviz" />
   <arg name="rviz_required" default="true" />
   <!-- mouse joy key none -->
-  <arg name="teleop" default="mouse" />
+  <arg name="teleop" default="joy" />
 
   <include file="$(find oit_navigation_minibot_03)/launch/real/devices.launch">
     <arg name="roboclaw_settings" value="$(arg roboclaw_settings)" />
