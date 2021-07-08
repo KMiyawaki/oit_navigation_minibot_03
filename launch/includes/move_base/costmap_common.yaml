@@ -3,7 +3,7 @@ raytrace_range: 3.0
 transform_tolerance: 1.0
 
 # robot_radius: 0.4
-footprint: [[0.0385, 0.0575], [0.0385, -0.0575], [-0.1065, -0.0575], [-0.1065, 0.0575]]
+footprint: [[0.13, 0.2], [0.13, -0.2], [-0.27, -0.2], [-0.27, 0.2]]
 footprint_padding: 0.05
 
 unknown_cost_value: 0
