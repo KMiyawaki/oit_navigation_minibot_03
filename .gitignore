@@ -49,6 +49,5 @@ CATKIN_IGNORE
 #Visucal Studio Code
 .vscode
 
-# DNN models
-/models/*
-!/models/get_models.sh
+# rosbags
+/bags/*

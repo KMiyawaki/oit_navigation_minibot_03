@@ -3,6 +3,7 @@
   <arg name="xmax" default="5"/>
   <arg name="ymin" default="-5"/>
   <arg name="ymax" default="5"/>
+  <arg name="rosbag" default="false" />
 
   <include file="$(find oit_navigation_minibot_03)/launch/real/teleop.launch">
     <arg name="rviz_conf" value="$(find oit_navigation_minibot_03)/config/rviz/mapping.rviz" />
@@ -15,4 +16,6 @@
     <param name="ymin" value="$(arg ymin)" />
     <param name="ymax" value="$(arg ymax)" />
   </node>
+  
+  <include if="$(arg rosbag)" file="$(find oit_navigation_minibot_03)/launch/record_rosbag.launch" required="true"/>
 </launch>

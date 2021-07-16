@@ -6,6 +6,7 @@
   <arg name="rviz_required" default="true" />
   <!-- mouse joy key none -->
   <arg name="teleop" default="joy" />
+  <arg name="rosbag" default="false" />
 
   <include file="$(find oit_navigation_minibot_03)/launch/real/devices.launch">
     <arg name="roboclaw_settings" value="$(arg roboclaw_settings)" />
@@ -18,4 +19,6 @@
   <include file="$(find oit_navigation_minibot_03)/launch/includes/teleop_select.launch">
     <arg name="teleop" value="$(arg teleop)" />
   </include>
+
+  <include if="$(arg rosbag)" file="$(find oit_navigation_minibot_03)/launch/record_rosbag.launch" required="true"/>
 </launch>
