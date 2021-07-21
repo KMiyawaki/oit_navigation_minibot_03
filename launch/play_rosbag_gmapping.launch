@@ -1,0 +1,25 @@
+<launch>
+  <arg name="bag" default="" />
+  <arg name="bag_path" default="$(find oit_navigation_minibot_03)/bags/$(arg bag)" />
+  <arg name="rviz_conf" default="$(find oit_navigation_minibot_03)/config/rviz/mapping.rviz" />
+  <arg name="rate" default="1" />
+  <arg name="xmin" default="-5"/>
+  <arg name="xmax" default="5"/>
+  <arg name="ymin" default="-5"/>
+  <arg name="ymax" default="5"/>
+
+  <include file="$(find oit_navigation_minibot_03)/launch/play_rosbag.launch">
+    <arg name="bag_path" value="$(arg bag_path)" />
+    <arg name="tf_remap" value="/tf_raw" />
+    <arg name="rviz_conf" value="$(arg rviz_conf)" />
+    <arg name="rate" value="$(arg rate)" />
+  </include>
+  <node name="remvoe_map_frame" pkg="oit_navigation_minibot_03" type="remove_map_frame.py" required="true" />
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" required="true" >
+    <remap from="scan" to="base_scan" />
+    <param name="xmin" value="$(arg xmin)" />
+    <param name="xmax" value="$(arg xmax)" />
+    <param name="ymin" value="$(arg ymin)" />
+    <param name="ymax" value="$(arg ymax)" />
+  </node>
+</launch>

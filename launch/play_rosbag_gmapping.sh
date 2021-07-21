@@ -2,7 +2,7 @@
 
 function main() {
     local -r PKG="oit_navigation_minibot_03"
-    local -r LAUNCH="play_rosbag.launch"
+    local -r LAUNCH="play_rosbag_gmapping.launch"
     local -r PARAM_NAME="bag"
     local -r MIN_ARG=1
     if [ $# -lt "${MIN_ARG}" ]; then
