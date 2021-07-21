@@ -51,3 +51,8 @@ CATKIN_IGNORE
 
 # rosbags
 /bags/*
+!/bags/.gitkeep
+
+# ZED data
+/zed/*
+!/zed/.gitkeep
