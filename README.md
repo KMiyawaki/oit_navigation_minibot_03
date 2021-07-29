@@ -188,6 +188,7 @@ $ mv 2021-07-18-10-23-48.bag ~/catkin_ws/src/oit_navigation_minibot_03/bags # �
 以下のコマンドで、`bag`ファイルを再生する。
 
 ```shell
+$ roscd oit_navigation_minibot_03/launch
 $ ./play_rosbag.sh ../bags/2021-07-18-10-23-48.bag
 ... logging to /home/miyawaki/.ros/log/2870ef18-ef78-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-7031.log
 Checking log directory for disk usage. This may take a while.
@@ -221,7 +222,7 @@ done
 再生時に`rate:=数値`オプションをつけることで、早送り／スロー再生が可能である。
 
 ```shell
-./play_rosbag.sh ../bags/2021-07-18-10-23-48.bag rate:=2 # 倍速。rate:=0.5 でスロー再生。
+$ ./play_rosbag.sh ../bags/2021-07-18-10-23-48.bag rate:=2 # 倍速。rate:=0.5 でスロー再生。
 ```
 
 ### rosbagから地図を作成する
@@ -229,6 +230,7 @@ done
 以下のコマンドで`bag`ファイルを再生し、記録されたセンサデータから地図を作成する。
 
 ```shell
+$ roscd oit_navigation_minibot_03/launch
 $ ./play_rosbag_gmapping.sh ../bags/2021-07-18-10-23-48.bag 
 ... logging to /home/miyawaki/.ros/log/5269cbfe-ef79-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-8285.log
 Checking log directory for disk usage. This may take a while.
