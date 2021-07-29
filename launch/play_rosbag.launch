@@ -1,6 +1,7 @@
 <launch>
   <arg name="bag" default="" />
   <arg name="bag_path" default="$(find oit_navigation_minibot_03)/bags/$(arg bag)" />
+  <arg name="svo_path" default="/home/miyawaki/catkin_ws/src/oit_navigation_minibot_03/zed/210718/HD2K_SN29662061_10-23-49.svo" />
   <arg name="rviz_conf" default="$(find oit_navigation_minibot_03)/config/rviz/simple.rviz" />
   <arg name="rate" default="1" />
   <arg name="robot_model" default="$(find oit_navigation_minibot_03)/urdf/minibot_03.xacro"/>
@@ -12,4 +13,8 @@
   <node name="playbag" pkg="rosbag" type="play" args="-r $(arg rate) --clock $(arg bag_path)" required="true">
     <remap from="/tf" to="$(arg tf_remap)" />
   </node>
+
+  <include if="$(eval arg('svo_path') != '')" file="$(find zed_wrapper)/launch/zed2.launch">
+    <arg name="svo_file" value="$(arg svo_path)" />
+  </include>
 </launch>
