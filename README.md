@@ -10,7 +10,7 @@ $ sudo apt install ros-melodic-urg-node
 $ sudo apt install xterm
 ```
 
-- ZEDを使う、あるいはSVOファイルを再生する場合はZED関連ソフトのインストールも必要。 nVidia GPU搭載PC、もしくはJetsonでないと駆動できない。
+- ZEDを使う、あるいはSVOファイルを再生する場合は[ZED関連ソフトのインストール](./README_ZED.md)も必要。 nVidia GPU搭載PC、もしくはJetsonでないと駆動できない。
   - [Getting Started with ROS and ZED](https://www.stereolabs.com/docs/ros/)
 
 - テレオペや地図作成にはジョイスティックが必要。
@@ -144,6 +144,26 @@ roslaunch navigation.launch map_name:=test rosbag:=true # 同上
 $ cd ~/.ros
 $ ls *.bag
 2021-07-18-10-23-48.bag # ファイル名は rosbag を記録した日時によって変わる。
+$ rosbag info ./2021-07-18-10-23-48.bag # http://wiki.ros.org/rosbag/Commandline
+path:         ./2021-07-18-10-23-48.bag
+version:      2.0
+duration:     22:05s (1325s)
+start:        Jul 18 2021 10:23:49.42 (1626571429.42)
+end:          Jul 18 2021 10:45:54.61 (1626572754.61)
+size:         16.3 MB
+messages:     134007
+compression:  bz2 [305/305 chunks; 6.38%]
+uncompressed: 229.5 MB @ 177.3 KB/s
+compressed:    14.7 MB @  11.3 KB/s (6.38%)
+types:        geometry_msgs/Twist   [9f195f881246fdfa2798d1d3eebca84a]
+              nav_msgs/Odometry     [cd5e73d190d741a2f92e81eda573aca7]
+              sensor_msgs/LaserScan [90c7ef2dc6895d81024acba2ac42f369]
+              tf2_msgs/TFMessage    [94810edda583a504dfda3829e70d7eec]
+topics:       /base_scan   18047 msgs    : sensor_msgs/LaserScan
+              /cmd_vel     36559 msgs    : geometry_msgs/Twist  
+              /odom        26442 msgs    : nav_msgs/Odometry    
+              /tf          52958 msgs    : tf2_msgs/TFMessage    (2 connections)
+              /tf_static       1 msg     : tf2_msgs/TFMessage
 ```
 
 ここで、拡張子`bag`のファイルが見当たらないとき、以下のコマンドを実行して拡張子`active`のファイルが存在した場合は`rosbag`の完全な記録に失敗している。
