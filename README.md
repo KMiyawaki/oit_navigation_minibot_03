@@ -1,5 +1,9 @@
 # Minibot v3
 
+[中之島ロボットチャレンジ](https://www.nakanoshima-rc.jp/)用小型ロボットの説明。
+
+![20210717_101627.jpg](./images/20210717_101627.jpg)
+
 ## 必要なソフト・ハード
 
 ```shell
@@ -190,7 +194,7 @@ $ mv 2021-07-18-10-23-48.bag ~/catkin_ws/src/oit_navigation_minibot_03/bags # �
 ```shell
 $ roscd oit_navigation_minibot_03/launch
 $ ./play_rosbag.sh ../bags/2021-07-18-10-23-48.bag
-... logging to /home/miyawaki/.ros/log/2870ef18-ef78-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-7031.log
+... logging to /home/{user name}/.ros/log/2870ef18-ef78-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-7031.log
 Checking log directory for disk usage. This may take a while.
 Press Ctrl-C to interrupt
 Done checking log file disk usage. Usage is <1GB.
@@ -232,7 +236,7 @@ $ ./play_rosbag.sh ../bags/2021-07-18-10-23-48.bag rate:=2 # 倍速。rate:=0.5 
 ```shell
 $ roscd oit_navigation_minibot_03/launch
 $ ./play_rosbag_gmapping.sh ../bags/2021-07-18-10-23-48.bag 
-... logging to /home/miyawaki/.ros/log/5269cbfe-ef79-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-8285.log
+... logging to /home/{user name}/.ros/log/5269cbfe-ef79-11eb-ace6-a87eeaadf0a7/roslaunch-user-19115N-CLR-8285.log
 Checking log directory for disk usage. This may take a while.
 Press Ctrl-C to interrupt
 Done checking log file disk usage. Usage is <1GB.
@@ -251,6 +255,66 @@ PARAMETERS
 ![2021-07-28_16-57-06.png](./images/2021-07-28_16-57-06.png)
 
 前項同様、再生時に`rate:=数値`オプションをつけることで、早送り／スロー再生が可能である。ただし、あまりに早送りすぎると地図が歪む。停止方法も前項と同様である。
+
+## SVOを再生する
+
+事前に[ZED関連メモ](./README_ZED.md)を参照してZED SDKおよび[zed-ros-wrapper](https://www.stereolabs.com/docs/ros/#zed-ros-wrapper)をインストールしておくこと。  
+ZEDで録画した`SVO`ファイルは以下のコマンドで再生できる。
+
+```shell
+$ roscd oit_navigation_minibot_03/launch
+$ ./play_zed2.sh ../zed/210718/HD2K_SN29662061_10-23-49.svo 
+/home/{user name}/catkin_ws/src/oit_navigation_minibot_03/zed/210718/HD2K_SN29662061_10-23-49.svo
+... logging to /home/{user name}/.ros/log/6d2c8e10-f021-11eb-a2d0-a87eeaadf0a7/roslaunch-user-19115N-CLR-18588.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://user-19115N-CLR:40895/
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: melodic
+ * /rosversion: 1.14.11
+```
+
+![2021-07-29_13-00-44.png](./images/2021-07-29_13-00-44.png)
+
+ZED単体による自己位置推定も自動的に行われる。
+
+### SVOからのRTAB-Map
+
+ZEDで録画した`SVO`ファイルから以下のコマンドで[`RTAB-Map`](http://introlab.github.io/rtabmap/)を使って3次元地図を生成できる。  
+現状では、精度が低くほとんど使えない。
+
+```shell
+$ roscd oit_navigation_minibot_03/launch
+./play_zed2_rtabmap.sh ../zed/210718/HD2K_SN29662061_10-23-49.svo 
+/home/{user name}/catkin_ws/src/oit_navigation_minibot_03/zed/210718/HD2K_SN29662061_10-23-49.svo
+... logging to /home/{user name}/.ros/log/852902ea-f022-11eb-a2d0-a87eeaadf0a7/roslaunch-user-19115N-CLR-19701.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://user-19115N-CLR:42191/
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: melodic
+ * /rosversion: 1.14.11
+ * /zed/rtabmap/Grid/3D: True
+ * /zed/rtabmap/Grid/CellSize: 0.05
+ * /zed/rtabmap/Grid/ClusterRadius: 0.1
+ * /zed/rtabmap/Grid/DepthDecimation: 1
+ * /zed/rtabmap/Grid/DepthRoiRatios: [0.0, 0.0, 0.0, 0.0]
+ * /zed/rtabmap/Grid/FlatObstacleDetected: True 
+```
+
+![2021-07-29_13-08-33.png](./images/2021-07-29_13-08-33.png)
 
 ## 作成した地図をシミュレータで使う（編集中）
 
