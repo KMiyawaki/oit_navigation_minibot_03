@@ -45,10 +45,10 @@ ZED SDK installation complete !
 $ sudo rm -R /usr/local/zed/
 ```
 
-## zed-ros-wrapper
+## zed-ros-wrapper, zed-ros-examples
 
 これはZEDのカメラそのものをPCで駆動する場合だけでなく、単に`svo`ファイル（ZEDの画像データを保存する独自形式）をROS上で再生する場合も必須である。  
-[zed-ros-wrapper](https://www.stereolabs.com/docs/ros/#zed-ros-wrapper)の指示に従いインストールすること。
+[zed-ros-wrapper](https://www.stereolabs.com/docs/ros/#zed-ros-wrapper)、および[zed-ros-examples](https://www.stereolabs.com/docs/ros/#zed-ros-examples)の指示に従いインストールすること。
 
 ## SVOファイルの録画
 
