@@ -9,7 +9,7 @@
   <param name="use_sim_time" value="true" />
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_conf)" required="true" />
-  <node name="playbag" pkg="rosbag" type="play" args="-r $(arg rate) --clock $(arg bag_path)" required="true">
+  <node name="playbag" pkg="rosbag" type="play" args="-r $(arg rate) --clock $(arg bag_path)" required="false">
     <remap from="/tf" to="$(arg tf_remap)" />
   </node>
 </launch>

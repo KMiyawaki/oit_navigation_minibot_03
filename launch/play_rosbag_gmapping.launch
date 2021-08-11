@@ -7,6 +7,7 @@
   <arg name="xmax" default="5"/>
   <arg name="ymin" default="-5"/>
   <arg name="ymax" default="5"/>
+  <arg name="delta" default="0.05"/>
 
   <include file="$(find oit_navigation_minibot_03)/launch/play_rosbag.launch">
     <arg name="bag_path" value="$(arg bag_path)" />
@@ -15,11 +16,12 @@
     <arg name="rate" value="$(arg rate)" />
   </include>
   <node name="remvoe_map_frame" pkg="oit_navigation_minibot_03" type="remove_map_frame.py" required="true" />
-  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" required="true" >
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" required="true">
     <remap from="scan" to="base_scan" />
     <param name="xmin" value="$(arg xmin)" />
     <param name="xmax" value="$(arg xmax)" />
     <param name="ymin" value="$(arg ymin)" />
     <param name="ymax" value="$(arg ymax)" />
+    <param name="delta" value="$(arg delta)" />
   </node>
 </launch>
