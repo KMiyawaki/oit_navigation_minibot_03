@@ -16,7 +16,7 @@ window
 # load an environment bitmap
 floorplan
 (
-  bitmap "./nakanosima10_border.png"
+  bitmap "./nakanoshima_2021-07-18-10-23-48_005_border.png"
   size [221.30 168.50 1.5]
   pose [86.45 -61.55 0 0 0]
 )

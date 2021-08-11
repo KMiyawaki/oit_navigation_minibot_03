@@ -14,6 +14,16 @@ function extract_map_origin(){
   echo "${ORIGIN}"
 }
 
+function extract_map_resolution(){
+  if [ $# -ne 1 ]; then
+    echo "usage:${0} map_yaml" 1>&2
+    exit 1
+  fi
+  local RESOLUTION=$(grep resolution ${1})
+  RESOLUTION=${RESOLUTION/resolution:/}
+  echo "${RESOLUTION}"
+}
+
 function main(){
   if [ $# -ne 1 ]; then
     echo "usage:${0} map_name" 1>&2
@@ -27,10 +37,11 @@ function main(){
   echo "Add black border into ${MAP_PGM}... "
   ./make_border.sh ${MAP_PGM}
   echo "Generated ${MAP_PNG}"
+  local -r RESOLUTION=$(extract_map_resolution "${MAP_YAML}")
   local -r IMG_WIDTH=$(identify -format "%w" ${MAP_PNG})
   local -r IMG_HEIGHT=$(identify -format "%h" ${MAP_PNG})
-  local -r MAP_WIDTH=$(echo "scale=2;${IMG_WIDTH} * 0.05" | bc)
-  local -r MAP_HEIGHT=$(echo "scale=2;${IMG_HEIGHT} * 0.05" | bc)
+  local -r MAP_WIDTH=$(echo "scale=2;${IMG_WIDTH} * ${RESOLUTION}" | bc)
+  local -r MAP_HEIGHT=$(echo "scale=2;${IMG_HEIGHT} * ${RESOLUTION}" | bc)
   local -r ORIGIN=$(extract_map_origin "${MAP_YAML}")
   local OX=
   local OY=
